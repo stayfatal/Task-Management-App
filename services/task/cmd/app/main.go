@@ -4,10 +4,10 @@ import (
 	"fmt"
 	"net/http"
 	"os"
-	"tma/services/account/config"
-	"tma/services/account/internal/repository"
-	"tma/services/account/internal/service"
-	"tma/services/account/internal/transport"
+	"tma/services/task/config"
+	"tma/services/task/internal/repository"
+	"tma/services/task/internal/service"
+	"tma/services/task/internal/transport"
 
 	"github.com/pkg/errors"
 	"github.com/rs/zerolog"
@@ -35,7 +35,7 @@ func main() {
 	log.Info().Msg(fmt.Sprintf("Starting server on port %d", config.Cfg.Port))
 
 	if err := http.ListenAndServe(fmt.Sprintf(":%d", config.Cfg.Port), srv); err != nil {
-		log.Fatal().Err(errors.Wrap(err, "starting server")).Msg("")
+		log.Fatal().Stack().Err(err).Msg("")
 	}
 }
 
